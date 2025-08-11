@@ -136,7 +136,7 @@ full = [
     "fastembed>=0.3.6,<0.4.0; sys_platform == 'darwin' or platform_machine != 'x86_64'",
     "fastembed-gpu>=0.3.6,<0.4.0; sys_platform != 'darwin' and platform_machine == 'x86_64'",
     "flagembedding==1.2.10",
-    "torch>=2.5.0,<3.0.0",
+    "torch>=2.2.0,<2.3.0",
     "transformers>=4.35.0,<5.0.0",
 ]
 
@@ -168,6 +168,16 @@ packages = [
 
 [[tool.uv.index]]
 url = "https://mirrors.aliyun.com/pypi/simple"
+
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://pypi.org/simple"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+transformers = { index = "pytorch" }
+flagembedding = { index = "pytorch" }
 
 [tool.ruff]
 line-length = 200
