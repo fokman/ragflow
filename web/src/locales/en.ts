@@ -38,6 +38,14 @@ export default {
       previousPage: 'Previous',
       nextPage: 'Next',
       add: 'Add',
+      promptPlaceholder: `Please input or use / to quickly insert variables.`,
+      mcp: {
+        namePlaceholder: 'My MCP Server',
+        nameRequired:
+          'It must be 1–64 characters long and can only contain letters, numbers, hyphens, and underscores.',
+        urlPlaceholder: 'https://api.example.com/v1/mcp',
+        tokenPlaceholder: 'e.g. eyJhbGciOiJIUzI1Ni...',
+      },
     },
     login: {
       login: 'Sign in',
@@ -554,6 +562,7 @@ This auto-tagging feature enhances retrieval by adding another layer of domain-s
       tavilyApiKeyHelp: 'How to get it?',
       crossLanguage: 'Cross-language search',
       crossLanguageTip: `Select one or more languages for cross‑language search. If no language is selected, the system searches with the original query.`,
+      createChat: 'Create chat',
     },
     setting: {
       profile: 'Profile',
@@ -706,7 +715,7 @@ This auto-tagging feature enhances retrieval by adding another layer of domain-s
         'Please input Google Cloud Service Account Key in base64 format',
       addGoogleRegion: 'Google Cloud Region',
       GoogleRegionMessage: 'Please input Google Cloud Region',
-      modelProvidersWarn: `Please add both embedding model and LLM in <b>Settings > Model providers</b>  firstly. Then, set them in 'System model settings'.`,
+      modelProvidersWarn: `Please add both embedding model and LLM in <b>Settings > Model providers</b> first. Then, set them in 'Set default models'.`,
       apiVersion: 'API-Version',
       apiVersionMessage: 'Please input API version',
       add: 'Add',
@@ -732,6 +741,7 @@ This auto-tagging feature enhances retrieval by adding another layer of domain-s
       view: 'View',
       modelsToBeAddedTooltip:
         'If your model provider is not listed but claims to be "OpenAI-compatible", select the OpenAI-API-compatible card to add the relevant model(s). ',
+      mcp: 'MCP',
     },
     message: {
       registered: 'Registered!',
@@ -1018,7 +1028,7 @@ This auto-tagging feature enhances retrieval by adding another layer of domain-s
         '30d': '30 days',
       },
       publish: 'API',
-      exeSQL: 'ExeSQL',
+      exeSQL: 'Execute SQL',
       exeSQLDescription:
         'A component that performs SQL queries on a relational database, supporting querying from MySQL, PostgreSQL, or MariaDB.',
       dbType: 'Database Type',
@@ -1049,7 +1059,7 @@ This auto-tagging feature enhances retrieval by adding another layer of domain-s
       },
       operator: 'Operator',
       value: 'Value',
-      useTemplate: 'Use this template',
+      useTemplate: 'Use',
       wenCai: 'WenCai',
       queryType: 'Query type',
       wenCaiDescription:
@@ -1155,7 +1165,7 @@ This auto-tagging feature enhances retrieval by adding another layer of domain-s
       note: 'Note',
       noteDescription: 'Note',
       notePlaceholder: 'Please enter a note',
-      invoke: 'Invoke',
+      invoke: 'HTTP Request',
       invokeDescription: `A component capable of calling remote services, using other components' outputs or constants as inputs.`,
       url: 'Url',
       method: 'Method',
@@ -1206,10 +1216,7 @@ This auto-tagging feature enhances retrieval by adding another layer of domain-s
       jsonUploadTypeErrorMessage: 'Please upload json file',
       jsonUploadContentErrorMessage: 'json file error',
       iteration: 'Iteration',
-      iterationDescription: `This component firstly split the input into array by "delimiter".
-Perform the same operation steps on the elements in the array in sequence until all results are output, which can be understood as a task batch processor.
-
-For example, within the long text translation iteration node, if all content is input to the LLM node, the single conversation limit may be reached. The upstream node can first split the long text into multiple fragments, and cooperate with the iterative node to perform batch translation on each fragment to avoid reaching the LLM message limit for a single conversation.`,
+      iterationDescription: `A looping component that iterates over an input array and executes a defined logic for each item.`,
       delimiterTip: `
 This delimiter is used to split the input text into several text pieces echo of which will be performed as input item of each iteration.`,
       delimiterOptions: {
@@ -1295,13 +1302,56 @@ This delimiter is used to split the input text into several text pieces echo of 
       agentDescription:
         'Builds agent components equipped with reasoning, tool usage, and multi-agent collaboration. ',
       maxRecords: 'Max records',
-      stringTransform: 'String transform',
-      userFillUp: 'Input',
+      createAgent: 'Create Agent',
+      stringTransform: 'Text Processing',
+      userFillUp: 'Await Response',
+      userFillUpDescription: `Pauses the workflow and waits for the user's message before continuing.`,
       codeExec: 'Code',
       tavilySearch: 'Tavily Search',
       tavilySearchDescription: 'Search results via Tavily service.',
       tavilyExtract: 'Tavily Extract',
       tavilyExtractDescription: 'Tavily Extract',
+      log: 'Log',
+      management: 'Management',
+      import: 'Import',
+      export: 'Export',
+      seconds: 'Seconds',
+      subject: 'Subject',
+      tag: 'Tag',
+      tagPlaceholder: 'Please enter tag',
+      descriptionPlaceholder: 'Please enter description',
+      line: 'Single-line text',
+      paragraph: 'Paragraph text',
+      options: 'Dropdown options',
+      file: 'File upload',
+      integer: 'Number',
+      boolean: 'Boolean',
+
+      logTimeline: {
+        begin: 'Ready to begin',
+        agent: 'Agent is thinking',
+        userFillUp: 'Waiting for you',
+        retrieval: 'Looking up knowledge',
+        message: 'Agent says',
+        awaitResponse: 'Waiting for you',
+        switch: 'Choosing the best path',
+        iteration: 'Batch processing',
+        categorize: 'Categorising info',
+        code: 'Running a quick script',
+        textProcessing: 'Tidying up text',
+        tavilySearch: 'Searching the web',
+        tavilyExtract: 'Reading the page',
+        exeSQL: 'Querying database',
+        google: 'Searching the web',
+        wikipedia: 'Searching Wikipedia',
+        googleScholar: 'Academic search',
+        gitHub: 'Searching GitHub',
+        email: 'Sending email',
+        httpRequest: 'Calling an API',
+        wenCai: 'Querying financial data',
+      },
+      goto: 'Fail Branch',
+      comment: 'Default Value',
     },
     llmTools: {
       bad_calculator: {
@@ -1325,6 +1375,9 @@ This delimiter is used to split the input text into several text pieces echo of 
       serverType: 'Server Type',
       addMCP: 'Add MCP',
       editMCP: 'Edit MCP',
+    },
+    search: {
+      createSearch: 'Create Search',
     },
   },
 };
